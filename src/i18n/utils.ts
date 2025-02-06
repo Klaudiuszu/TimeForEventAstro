@@ -2,8 +2,7 @@ import { ui } from "./ui";
 
 export const LANGUAGES = {
   en: "English",
-  fr: "Français",
-  es: "Español",
+  pl: "Polski"
 };
 
 export const LANGUAGES_KEYS = Object.keys(LANGUAGES) as UiType[];
@@ -19,14 +18,11 @@ export function getLangFromUrl(url: URL) {
 }
 
 export function useTranslations(lang?: UiType) {
-  return function t(
-    key: keyof (typeof ui)[typeof DEFAULT_LANG],
-    ...args: any[]
-  ) {
+  return function t(key: keyof (typeof ui)[typeof DEFAULT_LANG], ...args: any[]): string {
     let translation = ui[lang ?? DEFAULT_LANG][key] || ui[DEFAULT_LANG][key];
     if (args.length > 0) {
       for (let i = 0; i < args.length; i++) {
-        translation = translation.replace(`{${i}}`, args[i]);
+        translation = translation.replace(`{${i}}`, args[i]) as any
       }
     }
     return translation;

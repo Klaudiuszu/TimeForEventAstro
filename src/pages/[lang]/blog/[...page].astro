@@ -10,7 +10,7 @@ const t = useTranslations(lang);
 export async function getStaticPaths({ paginate }) {
   const PAGE_SIZE = 2;
   const _posts = await getBlogPosts();
-  return ["en", "fr", "es"].flatMap((lang) => {
+  return ["en", "pl"].flatMap((lang) => {
     const posts_filtered = _posts
       ?.filter((blog) => {
         return blog?.data?.lang === lang;
@@ -23,7 +23,7 @@ export async function getStaticPaths({ paginate }) {
 const { page } = Astro.props;
 ---
 
-<Layout title="Blog" description="Blog" lang={lang}>
+<Layout pubDate={new Date()} title="Blog" description="Blog" lang={lang}>
   <style>
     main {
       width: 960px;
